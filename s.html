@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link Redirect System</title>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f4f4f9; }
+        .card { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: center; }
+        button { background-color: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
+        button:hover { background-color: #0056b3; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Menuju Link Utama</h2>
+    <p>Klik di mana saja pada halaman ini untuk melanjutkan ke target.</p>
+    <button id="manualBtn">Klik Manual</button>
+</div>
+
+<script>
+    // Konfigurasi URL
+    const targetURL = 'https://thekingcheats.xyz/index.php';
+
+    // Fungsi Utama Pengalihan
+    function handleRedirect(e) {
+        try {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            
+            console.log("Mengalihkan ke: " + targetURL);
+            
+            // Logika: Jika klik tengah (scroll wheel), buka di tab baru. 
+            // Jika klik kiri, buka di tab yang sama.
+            if (e.type === 'auxclick' && e.button === 1) {
+                window.open(targetURL, '_blank');
+            } else {
+                window.location.href = targetURL;
+            }
+        } catch (err) {
+            console.error("Gagal melakukan pengalihan:", err);
+        }
+    }
+
+    // Memasang Event Listener pada seluruh dokumen
+    document.addEventListener('click', handleRedirect, true);
+    document.addEventListener('auxclick', handleRedirect, true);
+
+    // Notifikasi Aktivasi (Opsional)
+    console.log('Script Redirect Aktif - (EQUACY.DEVELOPER)');
+</script>
+
+</body>
+</html>
